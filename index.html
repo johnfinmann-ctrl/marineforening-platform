@@ -105,9 +105,11 @@
   /* ---------- HERO (light photo) ---------- */
   .hero{position:relative; min-height:90svh; display:flex; align-items:flex-end; margin-top:76px; overflow:hidden; background:var(--navy-900);}
   @media(max-width:760px){.hero{min-height:85svh;}}
-  .hero-media{position:absolute; inset:0; z-index:0;}
-  .hero-fallback{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 58%; z-index:0;}
+  .hero-media{position:absolute; inset:0; z-index:0; overflow:hidden;}
+  .hero-fallback{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 58%; z-index:0; animation:heroSlowZoom 26s ease-in-out infinite alternate;}
   .hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 58%; z-index:1; opacity:0; transition:opacity .4s ease;}
+  @keyframes heroSlowZoom{0%{transform:scale(1);} 100%{transform:scale(1.045);}}
+  @media(prefers-reduced-motion:reduce){.hero-fallback{animation:none;}}
   .hero-video.is-ready{opacity:1;}
   .hero-overlay{position:absolute; inset:0; z-index:2; background:linear-gradient(100deg, rgba(8,42,69,0.72) 0%, rgba(8,42,69,0.42) 30%, rgba(8,42,69,0) 62%), linear-gradient(0deg, rgba(8,42,69,0.35) 0%, rgba(8,42,69,0) 30%);}
   @media(max-width:760px){.hero-overlay{background:linear-gradient(0deg, rgba(8,42,69,0.68) 0%, rgba(8,42,69,0.2) 45%, rgba(8,42,69,0) 65%);}}
@@ -115,11 +117,27 @@
   .hero-content{position:relative; z-index:3; width:100%; padding:64px 0 128px;}
   @media(max-width:760px){.hero-content{padding:48px 0 84px;}}
   .hero-content .wrap{max-width:680px;}
-  .hero h1{color:#fff; font-size:clamp(34px,6.4vw,78px); line-height:1.04; font-weight:500; text-shadow:0 3px 20px rgba(5,20,33,0.55); letter-spacing:-0.01em; text-transform:uppercase;}
-  @media(max-width:1024px){.hero h1{font-size:clamp(30px,5.6vw,60px);}}
-  @media(max-width:760px){.hero h1{font-size:clamp(26px,8.5vw,44px);}}
-  .hero-divider{width:64px; height:2px; background:var(--brass); margin-top:22px;}
-  .hero-sub{color:var(--brass-light); font-family:'Inter',sans-serif; font-size:15px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-top:16px; text-shadow:0 2px 10px rgba(5,20,33,0.5);}
+  .hero h1{color:#fff; font-family:'Inter',sans-serif; font-size:clamp(44px,8.5vw,96px); line-height:0.98; font-weight:800; text-shadow:0 3px 20px rgba(5,20,33,0.55); letter-spacing:-0.02em; text-transform:uppercase;}
+  .hero h1 em{font-style:normal; color:var(--brass-light);}
+  @media(max-width:1024px){.hero h1{font-size:clamp(38px,7.5vw,72px);}}
+  @media(max-width:760px){.hero h1{font-size:clamp(32px,12vw,52px);}}
+  .hero-sub{color:#fff; font-family:'Inter',sans-serif; font-size:17px; font-weight:500; letter-spacing:.01em; margin-top:14px; text-shadow:0 2px 10px rgba(5,20,33,0.5);}
+  @media(max-width:760px){.hero-sub{font-size:15px;}}
+
+  .hero-identity-row{display:flex; align-items:center; gap:0; margin-top:32px;}
+  .hero-identity-item{display:flex; flex-direction:column; align-items:center; gap:8px; padding:0 22px; text-align:center;}
+  .hero-identity-item:first-child{padding-left:0;}
+  .hero-identity-item + .hero-identity-item{border-left:1px solid rgba(255,255,255,0.3);}
+  .hero-identity-item span:last-child{color:#fff; font-family:'Inter',sans-serif; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; text-shadow:0 2px 8px rgba(5,20,33,0.5);}
+  .hero-identity-icon{width:46px; height:46px; border-radius:50%; border:1.5px solid rgba(255,255,255,0.55); display:flex; align-items:center; justify-content:center; color:#fff;}
+  .hero-identity-icon svg{width:21px; height:21px;}
+  @media(max-width:600px){.hero-identity-row{gap:0;} .hero-identity-item{padding:0 12px;} .hero-identity-icon{width:38px; height:38px;} .hero-identity-icon svg{width:17px; height:17px;} .hero-identity-item span:last-child{font-size:10px;}}
+
+  .hero-droplets{position:absolute; inset:0; z-index:2; overflow:hidden; pointer-events:none;}
+  .droplet{position:absolute; top:-8%; width:2px; height:34px; border-radius:2px; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 60%, rgba(255,255,255,0.75) 100%); opacity:0; animation:dropletFall 7s linear infinite;}
+  @keyframes dropletFall{0%{transform:translateY(0); opacity:0;} 8%{opacity:.5;} 70%{opacity:.35;} 100%{transform:translateY(115vh); opacity:0;}}
+  @media(max-width:760px){.droplet{height:24px;}}
+  @media(prefers-reduced-motion:reduce){.droplet{display:none;}}
   .hero-ctas{display:flex; flex-wrap:wrap; align-items:center; gap:14px 16px; margin-top:34px;}
   .hero-btn-primary{color:var(--navy-950); background:var(--brass); font-family:'Inter',sans-serif; font-size:14px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:15px 26px; border-radius:3px; text-shadow:none; display:inline-flex; align-items:center; gap:10px;}
   .hero-btn-primary:hover{background:var(--brass-light);}
@@ -579,15 +597,34 @@
         <source src="assets/media/hero/ebeltoft-marine-hero.mp4" type="video/mp4">
       </video>
     </div>
+    <div class="hero-droplets" aria-hidden="true">
+      <span class="droplet" style="left:18%; animation-delay:0s;"></span>
+      <span class="droplet" style="left:52%; animation-delay:-2.4s;"></span>
+      <span class="droplet" style="left:74%; animation-delay:-4.8s;"></span>
+      <span class="droplet" style="left:35%; animation-delay:-6.6s;"></span>
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="wrap">
-        <h1 id="heroTitle">Havet.<br>Historien.<br>Fællesskabet.</h1>
-        <div class="hero-divider"></div>
-        <p class="hero-sub" id="heroSub">Ebeltoft Marineforening</p>
+        <h1 id="heroTitle">Stærkere<br><em>sammen</em></h1>
+        <p class="hero-sub" id="heroSub">For havet. For hinanden. For Danmark.</p>
+        <div class="hero-identity-row">
+          <div class="hero-identity-item">
+            <span class="hero-identity-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="9" r="2.6"/><circle cx="15.5" cy="9" r="2.6"/><path d="M2.5 19c0-2.8 2.4-4.8 6-4.8M21.5 19c0-2.8-2.4-4.8-6-4.8"/></svg></span>
+            <span>Kammeratskab</span>
+          </div>
+          <div class="hero-identity-item">
+            <span class="hero-identity-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v14M5 12H3a9 9 0 0 0 9 9 9 9 0 0 0 9-9h-2M8 12a4 4 0 0 0 8 0"/></svg></span>
+            <span>Tradition</span>
+          </div>
+          <div class="hero-identity-item">
+            <span class="hero-identity-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-9.7-9C.7 8 3.3 4 7.3 4c1.9 0 3.6 1.1 4.7 2.9C13.1 5.1 14.8 4 16.7 4c4 0 6.6 4 4.9 7.5-2.1 4.4-9.6 9-9.6 9z"/></svg></span>
+            <span>Fællesskab</span>
+          </div>
+        </div>
         <div class="hero-ctas">
-          <a href="#" data-page="aktiviteter" data-cta="heroArrangementer" class="hero-btn-primary"><span class="cta-label">Se aktiviteter</span> <span aria-hidden="true">→</span></a>
-          <a href="#" data-page="medlem" data-cta="heroMedlem" class="hero-btn-secondary"><span class="cta-label">Bliv medlem</span> <span aria-hidden="true">→</span></a>
+          <a href="#" data-page="medlem" data-cta="heroMedlem" class="hero-btn-primary"><span class="cta-label">Bliv medlem</span> <span aria-hidden="true">→</span></a>
+          <a href="#" data-page="omforeningen" data-cta="heroLaesMere" class="hero-btn-secondary"><span class="cta-label">Læs mere</span> <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -2286,8 +2323,9 @@
     ["referater","Referater & dokumenter"],["galleri","Galleri"],["kontakt","Kontakt"],["kontingent","Kontingent"],["links","Links"]
   ];
   let ctaLinks = {
-    heroArrangementer: {context:"Forside — hero, primær knap", label:"Se aktiviteter", type:"internal", target:"aktiviteter"},
-    heroMedlem: {context:"Forside — hero, sekundær knap", label:"Bliv medlem", type:"internal", target:"medlem"},
+    heroArrangementer: {context:"Forside — hero (ikke længere i brug efter V6)", label:"Se aktiviteter", type:"internal", target:"aktiviteter"},
+    heroMedlem: {context:"Forside — hero, primær knap", label:"Bliv medlem", type:"internal", target:"medlem"},
+    heroLaesMere: {context:"Forside — hero, sekundær knap", label:"Læs mere", type:"internal", target:"omforeningen"},
     shortcutArrangementer: {context:"Forside — genvejskort", label:"Se arrangementer", type:"internal", target:"arrangementer"},
     shortcutFrivillig: {context:"Forside — genvejskort", label:"Se frivillige opgaver", type:"internal", target:"frivillig"},
     shortcutMedlem: {context:"Forside — genvejskort", label:"Bliv medlem", type:"internal", target:"medlem"},

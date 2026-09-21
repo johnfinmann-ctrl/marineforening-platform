@@ -277,6 +277,37 @@
   .stat-label{margin-top:6px; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); font-weight:600;}
 
   /* ---------- STATS EDITORIAL (typography, no boxed cards) ---------- */
+  /* ---------- 1917 — YEAR STATEMENT (big typographic element) ---------- */
+  .year-statement{background:var(--ivory); text-align:center;}
+  .year-statement .wrap{max-width:640px;}
+  .year-statement .eyebrow{display:block;}
+  .year-statement-num{font-family:'Fraunces',serif; font-weight:600; color:var(--brass); font-size:clamp(90px,18vw,220px); line-height:0.85; margin:6px 0 10px; letter-spacing:-0.02em;}
+  .year-statement h2{font-size:clamp(24px,3.2vw,34px); margin-bottom:14px;}
+  .year-statement p{color:var(--ink-soft); font-size:15.5px; line-height:1.7; max-width:520px; margin:0 auto;}
+
+  /* ---------- TRADITIONERNE LEVER (Fortid · Nutid · Fremtid) ---------- */
+  .tradition-lever{background:var(--navy-900);}
+  .tradition-lever .eyebrow{color:var(--brass);}
+  .tradition-lever h2{color:#fff;}
+  .tradition-lever .section-head p{color:rgba(255,255,255,0.72);}
+  .tradition-row{display:flex; align-items:center; justify-content:center; gap:0; margin-top:44px;}
+  .tradition-item{display:flex; flex-direction:column; align-items:center; gap:14px; padding:0 48px;}
+  .tradition-item + .tradition-item{border-left:1px solid rgba(255,255,255,0.2);}
+  .tradition-icon{width:64px; height:64px; border-radius:50%; border:1.5px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center; color:var(--brass-light);}
+  .tradition-icon svg{width:28px; height:28px;}
+  .tradition-label{color:#fff; font-family:'Inter',sans-serif; font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;}
+  @media(max-width:600px){.tradition-item{padding:0 20px;} .tradition-icon{width:50px; height:50px;} .tradition-icon svg{width:22px; height:22px;}}
+
+  /* ---------- FOND SECTION ---------- */
+  .fond-section .section-head{margin-bottom:0;}
+
+  /* ---------- FINAL CTA BANNER ---------- */
+  .final-cta{background:var(--navy-950); text-align:center;}
+  .final-cta .wrap{max-width:560px; display:flex; flex-direction:column; align-items:center; gap:16px;}
+  .final-cta h2{color:#fff; font-size:clamp(28px,4vw,42px);}
+  .final-cta p{color:rgba(255,255,255,0.75); font-size:15.5px; line-height:1.65;}
+  .final-cta .btn{margin-top:6px;}
+
   .stats-editorial{background:var(--navy-900);}
   .stats-editorial .stat-num{color:var(--brass-light);}
   .stats-editorial .stat-label{color:rgba(255,255,255,0.7);}
@@ -692,7 +723,7 @@
     <div class="wrap">
       <div class="discover-intro" data-reveal>
         <span class="eyebrow">Oplev Marineforeningen</span>
-        <h2>Et maritimt fællesskab</h2>
+        <h2>Sejlads og kammeratskab</h2>
         <p>Fra sejlads på Ebeltoft Havn til kammeratskab i Marinestuen — Ebeltoft Marineforening samler mennesker om havet, historien og hinanden.</p>
       </div>
       <div class="discover-row">
@@ -732,18 +763,28 @@
     </div>
   </section>
 
-  <!-- STORYTELLING (light, image-led editorial) -->
+  <!-- STORYTELLING: ET MARITIMT FÆLLESSKAB MED HISTORIE -->
   <section class="section story-editorial">
     <div class="wrap" data-reveal>
       <div style="position:relative; aspect-ratio:4/3; background:var(--sand);">
         <img src="assets/media/foreningen/foreningshuset-forfra.jpg" alt="Ebeltoft Marineforenings hus" style="width:100%; height:100%; object-fit:cover;">
       </div>
       <div>
-        <span class="eyebrow">Ebeltoft Havn</span>
-        <h2>Mere end en forening.<br>Et maritimt fællesskab siden 1917.</h2>
-        <p style="color:var(--ink-soft); font-size:15.5px; margin-top:16px; line-height:1.7;">Kammeratskab, søfart og maritime traditioner er kernen i Ebeltoft Marineforening — et fællesskab på tværs af generationer, hvor medlemmerne mødes om havet, hinanden og historien.</p>
-        <a href="#" data-page="historie" data-cta="storyCta" class="btn btn-brass" style="margin-top:24px;">Oplev vores historie →</a>
+        <span class="eyebrow">Om foreningen</span>
+        <h2>Et maritimt fællesskab med historie</h2>
+        <p style="color:var(--ink-soft); font-size:15.5px; margin-top:16px; line-height:1.7;">Ebeltoft Marineforening samler mennesker med interesse for Søværnet, søfarten og det maritime liv. Her mødes traditioner og historie med kammeratskab, aktiviteter og et levende fællesskab på havnen i Ebeltoft.</p>
+        <a href="#" data-page="omforeningen" data-cta="storyCta" class="btn btn-brass" style="margin-top:24px;">Om foreningen →</a>
       </div>
+    </div>
+  </section>
+
+  <!-- 1917 — MERE END 100 ÅRS MARITIME TRADITIONER -->
+  <section class="section year-statement">
+    <div class="wrap" data-reveal>
+      <span class="eyebrow">Siden</span>
+      <div class="year-statement-num">1917</div>
+      <h2>Mere end 100 års maritime traditioner</h2>
+      <p>Siden 1917 har Ebeltoft Marineforening været en del af byens maritime historie. Traditionerne lever videre gennem mennesker, aktiviteter, mindedage, Sluppen og fællesskabet omkring Marinestuen.</p>
     </div>
   </section>
 
@@ -752,13 +793,58 @@
     <div class="wrap" data-reveal>
       <div>
         <span class="eyebrow">Marinestuen</span>
-        <h2>Et hjem ved havnen.</h2>
-        <p style="color:var(--ink-soft); font-size:15.5px; margin-top:16px; line-height:1.7;">Siden 1992 har Marinestuen på Stockflethsvej været foreningens samlingspunkt — et sted for kammeratskab, historier og maritime traditioner, indrettet af medlemmerne selv.</p>
+        <h2>Marinestuen – vores hjem på havnen</h2>
+        <p style="color:var(--ink-soft); font-size:15.5px; margin-top:16px; line-height:1.7;">Midt i Ebeltofts maritime miljø ligger Marinestuen — foreningens hjem og naturlige mødested. Her mødes medlemmer til aktiviteter, arrangementer, foredrag og kammeratskab, omgivet af minder fra Søværnet og dansk søfart.</p>
         <a href="#" data-page="marinestuen" class="btn btn-brass" style="margin-top:24px;">Besøg Marinestuen →</a>
       </div>
       <div style="position:relative; aspect-ratio:4/3; background:var(--sand);">
         <img src="assets/media/arrangementer/marinestuen-bord.jpg" alt="Marinestuen — dækket bord til arrangement" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='assets/media/foreningen/foreningshuset-forfra.jpg';">
       </div>
+    </div>
+  </section>
+
+  <!-- TRADITIONERNE LEVER — FORTID · NUTID · FREMTID -->
+  <section class="section tradition-lever">
+    <div class="wrap">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">Traditionerne lever</span>
+        <h2>Fortid, nutid og fremtid</h2>
+        <p>Marineforeningens traditioner lever gennem sejlads, kammeratskab, Sluppen, flagallé, mindedage og foreningens øvrige aktiviteter.</p>
+      </div>
+      <div class="tradition-row" data-reveal>
+        <div class="tradition-item">
+          <span class="tradition-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18"/><path d="M6 4h12l-3 4 3 4H6"/></svg></span>
+          <span class="tradition-label">Fortid</span>
+        </div>
+        <div class="tradition-item">
+          <span class="tradition-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15h18l-2 4H5l-2-4z"/><path d="M6 15V6l10 3-4 3"/><path d="M12 6V3"/></svg></span>
+          <span class="tradition-label">Nutid</span>
+        </div>
+        <div class="tradition-item">
+          <span class="tradition-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v14M5 12H3a9 9 0 0 0 9 9 9 9 0 0 0 9-9h-2M8 12a4 4 0 0 0 8 0"/></svg></span>
+          <span class="tradition-label">Fremtid</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VI GIVER DET MARITIME VIDERE — MARINEFORENINGENS FOND -->
+  <section class="section bg-sand fond-section">
+    <div class="wrap">
+      <div class="section-head center" data-reveal>
+        <span class="eyebrow">Marineforeningens Fond</span>
+        <h2>Vi giver det maritime videre</h2>
+        <p>Ebeltoft Marineforenings Fond støtter unge fra Syddjurs Kommune, der ønsker at gå den maritime vej. Tradition handler derfor ikke kun om at bevare historien, men også om at skabe muligheder for næste generation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLIV EN DEL AF FÆLLESSKABET — FINAL CTA -->
+  <section class="section final-cta">
+    <div class="wrap" data-reveal>
+      <h2>Bliv en del af fællesskabet</h2>
+      <p>Ebeltoft Marineforening er et fællesskab for alle med interesse for havet, søfarten og de maritime traditioner.</p>
+      <a href="#" data-page="medlem" data-cta="finalCta" class="btn btn-brass">Bliv medlem →</a>
     </div>
   </section>
 
@@ -2329,7 +2415,8 @@
     shortcutArrangementer: {context:"Forside — genvejskort", label:"Se arrangementer", type:"internal", target:"arrangementer"},
     shortcutFrivillig: {context:"Forside — genvejskort", label:"Se frivillige opgaver", type:"internal", target:"frivillig"},
     shortcutMedlem: {context:"Forside — genvejskort", label:"Bliv medlem", type:"internal", target:"medlem"},
-    storyCta: {context:"Forside — 'Mere end en forening'", label:"Oplev vores historie", type:"internal", target:"historie"},
+    storyCta: {context:"Forside — 'Et maritimt fællesskab med historie'", label:"Om foreningen", type:"internal", target:"omforeningen"},
+    finalCta: {context:"Forside — afsluttende 'Bliv en del af fællesskabet'", label:"Bliv medlem", type:"internal", target:"medlem"},
     volunteerCta: {context:"Forside — Frivillighed-sektion", label:"Se frivillige opgaver", type:"internal", target:"frivillig"},
     eventsMoreCta: {context:"Forside — Kommende arrangementer", label:"Se alle arrangementer", type:"internal", target:"arrangementer"},
     boardMoreCta: {context:"Forside — Bestyrelse-teaser", label:"Se hele bestyrelsen", type:"internal", target:"bestyrelse"},

@@ -581,11 +581,13 @@
           <a href="#" data-page="sluppen">Sluppen &amp; Slupkoret</a>
           <a href="#" data-page="jubilaeum">100-års jubilæum</a>
           <a href="#" data-page="bestyrelse">Bestyrelsen</a>
+          <a href="#" data-page="udvalg">Udvalg &amp; funktioner</a>
           <div class="dropdown-label">Praktisk</div>
           <a href="#" data-page="referater">Referater &amp; dokumenter</a>
           <a href="#" data-page="galleri">Galleri</a>
           <a href="#" data-page="links">Links</a>
           <a href="#" data-page="kontingent">Kontingent</a>
+          <a href="https://www.ebeltoftmarineforening.dk/kabysrygtet" target="_blank" rel="noopener noreferrer">Kabysrygtet ↗</a>
           <a href="#" data-page="admin">Admin</a>
         </div>
       </div>
@@ -610,11 +612,13 @@
   <a href="#" data-page="sluppen">Sluppen &amp; Slupkoret</a>
   <a href="#" data-page="jubilaeum">100-års jubilæum</a>
   <a href="#" data-page="bestyrelse">Bestyrelsen</a>
+  <a href="#" data-page="udvalg">Udvalg &amp; funktioner</a>
   <div class="m-label">Mere</div>
   <a href="#" data-page="referater">Referater &amp; dokumenter</a>
   <a href="#" data-page="galleri">Galleri</a>
   <a href="#" data-page="links">Links</a>
   <a href="#" data-page="kontingent">Kontingent</a>
+  <a href="https://www.ebeltoftmarineforening.dk/kabysrygtet" target="_blank" rel="noopener noreferrer">Kabysrygtet ↗</a>
   <a href="#" data-page="admin">Admin</a>
   <a href="#" data-page="medlem" class="btn btn-brass btn-block">Bliv medlem</a>
 </div>
@@ -1096,6 +1100,18 @@
 </div>
 
 <!-- ============================================================ -->
+<!-- PAGE: UDVALG & FUNKTIONER -->
+<!-- ============================================================ -->
+<div class="page" id="page-udvalg">
+  <div class="page-hero"><div class="wrap"><span class="eyebrow">Om foreningen</span><h1>Udvalg &amp; funktioner</h1><p>Foreningens frivillige tovholdere og faste funktioner.</p></div></div>
+  <section class="section bg-white">
+    <div class="wrap">
+      <div class="board-grid" id="udvalgGrid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
 <!-- PAGE: REFERATER / DOKUMENTER -->
 <!-- ============================================================ -->
 <div class="page" id="page-referater">
@@ -1234,6 +1250,7 @@
         <button class="admin-tab" data-tab="betalinger">Betalinger</button>
         <button class="admin-tab" data-tab="dokumenter">Dokumenter &amp; referater</button>
         <button class="admin-tab" data-tab="bestyrelse">Bestyrelse</button>
+        <button class="admin-tab" data-tab="udvalg">Udvalg &amp; funktioner</button>
         <button class="admin-tab" data-tab="kontakt">Kontakt &amp; foreningsinfo</button>
         <button class="admin-tab" data-tab="forside">Forside</button>
         <button class="admin-tab" data-tab="links">Links</button>
@@ -1305,6 +1322,11 @@
       <div class="admin-panel" id="admin-bestyrelse">
         <div class="admin-toolbar"><span class="admin-panel-title">Bestyrelse</span><button class="btn btn-brass btn-sm" onclick="openAdminBoardForm()">+ Tilføj person</button></div>
         <div id="adminBoardList"></div>
+      </div>
+
+      <div class="admin-panel" id="admin-udvalg">
+        <div class="admin-toolbar"><span class="admin-panel-title">Udvalg &amp; funktioner</span><button class="btn btn-brass btn-sm" onclick="openAdminUdvalgForm()">+ Tilføj</button></div>
+        <div id="adminUdvalgList"></div>
       </div>
 
       <div class="admin-panel" id="admin-kontakt">
@@ -1391,9 +1413,11 @@
         <h4>Information</h4>
         <ul>
           <li><a href="#" data-page="bestyrelse">Bestyrelsen</a></li>
+          <li><a href="#" data-page="udvalg">Udvalg &amp; funktioner</a></li>
           <li><a href="#" data-page="referater">Referater og dokumenter</a></li>
           <li><a href="#" data-page="kontingent">Kontingent</a></li>
           <li><a href="#" data-page="galleri">Galleri</a></li>
+          <li><a href="https://www.ebeltoftmarineforening.dk/kabysrygtet" target="_blank" rel="noopener noreferrer">Kabysrygtet ↗</a></li>
         </ul>
       </div>
       <div>
@@ -2905,6 +2929,126 @@
   }
   renderBoard();
   renderAdminBoardList();
+
+  // ---------- UDVALG & FUNKTIONER ----------
+  let udvalgMembers = [
+    {id:"uv1", name:"Uwe Weissfeld", role:"Slupkoret", phone:"", email:"", photo:"", hidden:false},
+    {id:"uv2", name:"Christian Koudal", role:"Vedligeholdelse af fartøjer", phone:"", email:"", photo:"", hidden:false},
+    {id:"uv3", name:"Kurt Nielsen", role:"Vedligeholdelse af Sluppen", phone:"", email:"", photo:"", hidden:false},
+    {id:"uv4", name:"Per Snejbjerg", role:"Pudselauget", phone:"", email:"", photo:"", hidden:false},
+    {id:"uv5", name:"Thorkil Thorsen", role:"Kanonlauget", phone:"", email:"", photo:"", hidden:false},
+    {id:"uv6", name:"Steen Knudsen", role:"Flagalléen", phone:"", email:"", photo:"", hidden:false},
+    {id:"uv7", name:"John Finmann", role:"Tirsdagstræffet", phone:"", email:"", photo:"", hidden:false},
+    {id:"uv8", name:"Søren Høg Thomsen", role:"Webmaster/PR", phone:"", email:"", photo:"", hidden:false}
+  ];
+  function udvalgCard(m){
+    const avatarInner = m.photo ? `<img src="${m.photo}" alt="${m.name}">` : initials(m.name);
+    const tel = m.phone ? m.phone.replace(/[^\d+]/g,'') : '';
+    const btns = [];
+    if(m.phone) btns.push(`<a href="tel:${tel}" class="btn btn-outline">Ring</a>`);
+    if(m.email) btns.push(`<a href="mailto:${m.email}" class="btn btn-outline">Mail</a>`);
+    return `<div class="board-card">
+      <div class="avatar lg">${avatarInner}</div>
+      <h3>${m.name}</h3>
+      <div class="role">${m.role}</div>
+      ${(m.phone || m.email) ? `<div class="contact-line">${m.phone}${m.phone && m.email ? '<br>' : ''}${m.email}</div>` : ''}
+      ${btns.length ? `<div class="board-btns">${btns.join('')}</div>` : ''}
+    </div>`;
+  }
+  function renderUdvalg(){
+    const el = document.getElementById('udvalgGrid');
+    if(el) el.innerHTML = udvalgMembers.filter(m=>!m.hidden).map(udvalgCard).join('');
+  }
+  function adminUdvalgRow(m, i){
+    const avatarInner = m.photo ? `<img src="${m.photo}" alt="${m.name}">` : initials(m.name);
+    return `<div class="admin-row">
+      <div style="display:flex; align-items:center; gap:12px; flex:1;">
+        <div class="avatar">${avatarInner}</div>
+        <div class="admin-row-meta"><strong>${m.name}</strong><span>${m.role}${m.hidden?' · Skjult':''}</span></div>
+      </div>
+      <div class="admin-row-actions">
+        <button class="btn btn-outline btn-sm" onclick="moveUdvalgMember('${m.id}',-1)" ${i===0?'disabled style="opacity:.4;"':''}>↑</button>
+        <button class="btn btn-outline btn-sm" onclick="moveUdvalgMember('${m.id}',1)" ${i===udvalgMembers.length-1?'disabled style="opacity:.4;"':''}>↓</button>
+        <button class="btn btn-outline btn-sm" onclick="editUdvalgMember('${m.id}')">Rediger</button>
+        <button class="btn btn-outline btn-sm" onclick="toggleUdvalgHidden('${m.id}')">${m.hidden?'Vis':'Skjul'}</button>
+        <button class="btn btn-outline btn-sm" style="border-color:#B23A3A; color:#B23A3A;" onclick="deleteUdvalgMember('${m.id}')">Slet</button>
+      </div>
+    </div>`;
+  }
+  function renderAdminUdvalgList(){
+    const el = document.getElementById('adminUdvalgList');
+    if(el) el.innerHTML = udvalgMembers.map(adminUdvalgRow).join('');
+  }
+  function moveUdvalgMember(id, dir){
+    const i = udvalgMembers.findIndex(m=>m.id===id);
+    const j = i+dir;
+    if(j<0 || j>=udvalgMembers.length) return;
+    [udvalgMembers[i], udvalgMembers[j]] = [udvalgMembers[j], udvalgMembers[i]];
+    renderUdvalg(); renderAdminUdvalgList();
+  }
+  function toggleUdvalgHidden(id){
+    const m = udvalgMembers.find(x=>x.id===id);
+    if(m){ m.hidden=!m.hidden; renderUdvalg(); renderAdminUdvalgList(); showToast(m.hidden?'Personen er skjult.':'Personen er synlig igen.'); }
+  }
+  function deleteUdvalgMember(id){
+    udvalgMembers = udvalgMembers.filter(m=>m.id!==id);
+    renderUdvalg(); renderAdminUdvalgList();
+    showToast('Personen er fjernet.');
+  }
+  let pendingUdvalgPhoto = "";
+  function handleUdvalgPhotoInput(input){
+    pendingUdvalgPhoto = "";
+    if(!input.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = (e)=>{
+      pendingUdvalgPhoto = e.target.result;
+      const preview = document.getElementById('udvalgPhotoPreview');
+      if(preview) preview.innerHTML = `<img src="${e.target.result}" style="width:64px;height:64px;object-fit:cover;border-radius:50%;">`;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+  function udvalgFormFields(m){
+    m = m || {name:"", role:"", phone:"", email:"", photo:""};
+    return `
+      <div class="form-row"><label>Navn</label><input id="uvName" type="text" value="${(m.name||'').replace(/"/g,'&quot;')}"></div>
+      <div class="form-row"><label>Funktion</label><input id="uvRole" type="text" value="${(m.role||'').replace(/"/g,'&quot;')}"></div>
+      <div class="form-row"><label>Telefon (valgfri)</label><input id="uvPhone" type="text" value="${m.phone||''}"></div>
+      <div class="form-row"><label>E-mail (valgfri)</label><input id="uvEmail" type="email" value="${m.email||''}"></div>
+      <div class="form-row"><label>Foto</label><input type="file" accept="image/*" onchange="handleUdvalgPhotoInput(this)" style="min-height:auto; padding:10px;"><div id="udvalgPhotoPreview" style="margin-top:8px;">${m.photo?`<img src="${m.photo}" style="width:64px;height:64px;object-fit:cover;border-radius:50%;">`:''}</div></div>
+    `;
+  }
+  function openAdminUdvalgForm(){
+    pendingUdvalgPhoto = "";
+    openModal(`<h3>Tilføj udvalg/funktion</h3>${udvalgFormFields()}<button class="btn btn-brass btn-block" onclick="saveNewUdvalgMember()">Gem</button>`);
+  }
+  function saveNewUdvalgMember(){
+    const name = document.getElementById('uvName').value.trim();
+    if(!name){ showToast('Udfyld venligst et navn.'); return; }
+    udvalgMembers.push({id:'uv'+Math.floor(Math.random()*100000), name, role:document.getElementById('uvRole').value.trim(), phone:document.getElementById('uvPhone').value.trim(), email:document.getElementById('uvEmail').value.trim(), photo:pendingUdvalgPhoto, hidden:false});
+    renderUdvalg(); renderAdminUdvalgList();
+    closeModal();
+    showToast('Tilføjet.');
+  }
+  function editUdvalgMember(id){
+    const m = udvalgMembers.find(x=>x.id===id);
+    if(!m) return;
+    pendingUdvalgPhoto = m.photo;
+    openModal(`<h3>Rediger udvalg/funktion</h3>${udvalgFormFields(m)}<button class="btn btn-brass btn-block" onclick="saveUdvalgMemberEdit('${m.id}')">Gem ændringer</button>`);
+  }
+  function saveUdvalgMemberEdit(id){
+    const m = udvalgMembers.find(x=>x.id===id);
+    if(!m) return;
+    m.name = document.getElementById('uvName').value.trim()||m.name;
+    m.role = document.getElementById('uvRole').value.trim();
+    m.phone = document.getElementById('uvPhone').value.trim();
+    m.email = document.getElementById('uvEmail').value.trim();
+    if(pendingUdvalgPhoto) m.photo = pendingUdvalgPhoto;
+    renderUdvalg(); renderAdminUdvalgList();
+    closeModal();
+    showToast('Opdateret.');
+  }
+  renderUdvalg();
+  renderAdminUdvalgList();
 
   // ---------- ADMIN ----------
   function adminEventRow(e){
